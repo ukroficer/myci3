@@ -1,0 +1,9 @@
+{
+    "repositories": [
+        {
+            "url": "https://github.com/ukroficer/myci3.git",
+            "type": "git"
+        }
+    ],
+    
+}
