@@ -1,0 +1,86 @@
+//	var
+@redClr: #ef4758;
+@blueClr: #3583ef;
+@darkBlueClr: #163450;
+
+
+
+//	html
+#header {
+ 	background-color: #fff;
+ 	background-image: none;
+ 	border-bottom: @redClr;
+}
+body {
+ 	background: transparent;
+ }
+html {
+	background: url(/img/wc_logo_main.png) no-repeat 98% 85% ,  #fff;
+}
+.fixed-header #header {
+	border-bottom:3px solid @redClr;
+}
+#ribbon {
+	background: @blueClr;
+}
+#ribbon .breadcrumb, #ribbon .breadcrumb a {
+	color: #fff !important;
+}
+#ribbon .breadcrumb li:last-child, #ribbon .breadcrumb > .active {
+	color: #fff;
+	font-weight: bold;
+}
+.breadcrumb > li + li:before {
+	color: #fff;
+    content: "/ ";
+    padding: 0 5px;
+}
+.breadcrumb > li + li:before {
+    color: #fff;
+    content: "/ ";
+    padding: 0 5px;
+}
+.page-footer {
+	background:@blueClr;
+}
+aside {
+	background: linear-gradient(to right, @darkBlueClr 93%, darken(@darkBlueClr, 5%) 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+nav ul li a {
+	color: #fff !important;
+	background-color: #transparent;
+	background: #transparent;
+}
+nav ul li a:active {
+	color: #fff;
+}
+nav ul li a:hover {
+	color: @redClr !important;
+}
+nav ul ul {
+	background: darken(@darkBlueClr, 5%);
+}
+nav ul ul li>a:hover {
+	background: lighten(@darkBlueClr, 10%);
+}
+nav ul li a:active {
+background: lighten(@darkBlueClr, 20%) !important;
+}
+.login-info a {
+	color: #fff;
+}
+#copiright_web {
+	a {
+		color: @darkBlueClr;
+			text-shadow: none;
+			font-weight: bold;
+	}
+}
+#hide_menu_in {
+	padding-top: 3px;
+}
+.pre-hidden-menu {
+	#left-panel {
+		left: -210px;
+	}
+}

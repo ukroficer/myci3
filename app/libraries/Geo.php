@@ -1,0 +1,147 @@
+<?php
+
+/**
+ * 
+ *
+ * A spark to handle geocoding of locations (or reverse lookup of given latitude and longitude).
+ *
+ * @package		Geocode
+ * @author		Johan André <johanandre@me.com>
+ *
+ *
+ */
+
+class Geo
+{
+    public $request_url = "http://maps.google.com/maps/api/geocode/json?";
+
+    public $sensor = "true";
+    public $language = "ru";
+
+    public $status = false;
+    public $response = false;
+    public $country = false;
+    public $country_short = false;
+    public $region = false;
+    public $region_short = false;
+    public $city = false;
+    public $address = false;
+    public $zipcode = false;
+    public $lat = false;
+    public $lng = false;
+    public $location_type = false;
+
+    public function __construct()
+    {
+        if (!function_exists('curl_init')) {
+            show_error('CURL is needed and not available on this configuration. Please install it to use the Geocode-library.');
+        }
+
+    }
+
+    public function query()
+    {
+        $args = func_get_args();
+
+        if (count($args) == 2) {
+            $query = 'latlng=' . $args[0] . ',' . $args[1] . '&language=' . $this->language .
+                '&sensor=' . $this->sensor;
+        } else {
+            $query = 'address=' . urlencode($args[0]) . '&language=' . $this->language .
+                '&sensor=' . $this->sensor;
+        }
+
+        $req = curl_init();
+
+        curl_setopt($req, CURLOPT_URL, $this->request_url . $query);
+        curl_setopt($req, CURLOPT_RETURNTRANSFER, 1);
+        $this->response = json_decode(curl_exec($req));
+        curl_close($req);
+
+        $this->status = $this->response->status;
+
+        if ($this->status == 'OK') {
+
+            $country = $this->get_component("country");
+
+            if ($country) {
+                $this->country = $country->long_name;
+                $this->country_short = $country->short_name;
+            }
+
+            $region = $this->get_component("administrative_area_level_1");
+
+            if ($region) {
+                $this->region = $region->long_name;
+                $this->region_short = $region->short_name;
+            }
+
+            $city = $this->get_component("locality");
+            if ($city) {
+                $this->city = $city->long_name;
+                
+            }
+           
+
+            $zipcode = $this->get_component("postal_code");
+
+            if ($zipcode) {
+                $this->zipcode = $zipcode->short_name;
+            }
+
+            $this->address = $this->response->results[0]->formatted_address;
+
+            $this->lat = $this->response->results[0]->geometry->location->lat;
+            $this->lng = $this->response->results[0]->geometry->location->lng;
+            $this->location_type = $this->response->results[0]->geometry->location_type;
+
+            return $this->response;
+
+        } else {
+            return false;
+        }
+    }
+
+    function get_component($type)
+    {
+        foreach ($this->response->results[0]->address_components as $k => $found) {
+            if (in_array($type, $found->types)) {
+                return $found;
+            }
+        }
+        return false;
+    }
+    function distance($array = array())
+    
+    
+    {
+
+        $origin = array_shift($array);
+        $destination = array_pop($array);
+        $via = array();
+        foreach ($array as $k => $v) {
+            $via[] = 'via:' . $v;
+        }
+        $waypoints = implode('|', $via);
+
+        $data = json_decode(file_get_contents('http://maps.googleapis.com/maps/api/directions/json?origin=' .
+            $origin . '&destination=' . $destination . '&waypoints=' . $waypoints .
+            '&sensor=false'));
+
+        $distance['total'] = 0;
+        foreach ($data->routes as $k => $v) {
+            foreach ($v->legs as $ke => $va) {
+
+               
+              
+                $distance['total'] = $va->distance->value + $distance['total'];
+            }
+
+        }
+
+         $distance['status'] = $data->status;
+         return $distance;
+        
+        
+        }
+}
