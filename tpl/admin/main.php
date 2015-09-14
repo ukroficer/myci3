@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title> WebCapitan admin </title>
+  <title> WebCapitan </title>
   <link href="/css/admin/reset.css" rel="stylesheet" type="text/css">
   <?php foreach($css_files as $file): ?>
     <link type="text/css" rel="stylesheet" href="<?php echo $file; ?>" />
@@ -35,7 +35,7 @@
   <!-- header -->
   <header id="header">
     <div class="logo">
-      <a href="<?=site_url();?>">
+      <a href="<?=site_url('admin');?>">
         <img src="/img/admin/WebCapitan.png" alt="" width="150" height="30">
       </a>
     </div>
@@ -116,7 +116,7 @@
     <!-- footer -->
     <footer id="footer">
       <div id="copiright_web">
-        <p>Разработано <a href="http://www.webcapitan.com" target="_blank">Webcapitan.com</a> 2012 - <?=date('Y');?></p>
+        <p>Разработано <a href="http://www.webcapitan.com/" target="_blank">Webcapitan.com</a> 2012 - <?=date('Y');?></p>
       </div>
     </footer>
     <!-- end-of-footer -->

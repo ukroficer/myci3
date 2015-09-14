@@ -39,7 +39,6 @@ ul {
 .boxBody .error{
       color: red;
   text-align: center;
-  padding-top: 5px;
 }
 .box.login span{
      width: 100%;
@@ -49,6 +48,13 @@ ul {
     text-align: center;
     padding-bottom: 5px;
     background: #eff4f6;
+}
+.box.login h1 {
+  text-align: center;
+  font-size: 16px;
+  color:#145e7e;
+  padding: 15px;
+  font-weight: bold;
 }
 .box.login{
     /*height: 310px !important;*/
@@ -524,13 +530,14 @@ ul {
   border-top: 1px solid #dde0e8;
   border-bottom: 1px solid #dde0e8;
   padding: 10px 20px;
+  box-sizing: border-box;
 }
 .box footer {
   background: #eff4f6;
   border-top: 1px solid #fff;
   padding: 22px 26px;
   overflow: hidden;
-  height: 32px;
+  /*height: 32px;*/
 }
 .box label {
   display: block;
@@ -1259,11 +1266,26 @@ p.error {
   margin-bottom: 20px;
   border: 1px solid transparent;
   border-radius: 4px;
+  width: 100%;
   color: #a94442;
   display: inline-block;
   background-color: #f2dede;
+  box-sizing: border-box;
   border-color: #ebccd1;
   margin-top: 15px;
+}
+p.successful {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    width: 100%;
+    color: #3c763d;
+    display: inline-block;
+    background-color: #dff0d8;
+    box-sizing: border-box;
+    border-color: #d6e9c6;
+    margin-top: 15px;
 }
 .menu_list{
     border:1px solid #c2c2c2;
@@ -1279,4 +1301,21 @@ p.error {
 }
 .menu_list:hover{
    color: #ef4758;
+}
+.fgp_info {
+  text-align: center;
+  float: left;
+  width: 100%;
+  margin:0 0 15px 0;
+  overflow: hidden;
+  font-size: 14px;
+  font-weight: bold;
+}
+.fgp_button {
+  float: left;
+  width: 100%;
+  text-align: center;
+}
+.fgp_button .btnLogin {
+  float: none;
 }
