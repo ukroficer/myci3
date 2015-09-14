@@ -33,13 +33,15 @@ class Forgot_password extends MY_Controller
             {
               $this->session->set_flashdata('message', $this->ion_auth->messages());
               redirect("admin/forgot_password", 'refresh'); 
+            } 
+            else
             {
               $this->session->set_flashdata('message', $this->ion_auth->errors());
               redirect("admin/forgot_password", 'refresh');
             }
-    }
-    }
-    $this->tpl->set('message', $this->session->flashdata('message'))->set_view('content', 'admin/forgot_password')->build('admin/main_no_auth');
   
+             
+    $this->tpl->set('message', $this->session->flashdata('message'))->set_view('content', 'admin/forgot_password')->build('admin/main_no_auth');
+   }
   }
 }
