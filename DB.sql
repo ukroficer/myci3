@@ -1388,7 +1388,9 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Дамп даних таблиці `users`
 --
 
-;
+INSERT INTO `users` (`id`, `group_id`, `img`, `ip_address`, `name`, `surname`, `username`, `post`, `password`, `salt`, `email`, `activation_code`, `forgotten_password_code`, `forgotten_password_time`, `remember_code`, `created_on`, `experience`, `last_login`, `active`, `first_name`, `last_name`, `company`, `location`, `country`, `city`, `phone`, `skype`, `icq`, `file`, `uid`, `site`, `online`, `uri`, `info`) VALUES
+(1, 1, '', 'ІJйВ', 'Демо', '', 'demo', 0, '7185013de9ad0ed9f90f4d80702681bb1d0aa1db', NULL, 'mail@webcapitan.com', NULL, NULL, NULL, NULL, 1440625006, '', 1442214240, '1', NULL, NULL, NULL, '', '', '', NULL, 'demo', NULL, '', '', '', 0, '', '');
+
 
 -- --------------------------------------------------------
 
