@@ -40,8 +40,8 @@ class Forgot_password extends MY_Controller
               redirect("admin/forgot_password", 'refresh');
             }
   
-             
+    }         
     $this->tpl->set('message', $this->session->flashdata('message'))->set_view('content', 'admin/forgot_password')->build('admin/main_no_auth');
-   }
+   
   }
 }
