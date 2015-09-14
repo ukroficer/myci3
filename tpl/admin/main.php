@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title> WebCapitan </title>
+  <title> WebCapitan admin </title>
   <link href="/css/admin/reset.css" rel="stylesheet" type="text/css">
   <?php foreach($css_files as $file): ?>
     <link type="text/css" rel="stylesheet" href="<?php echo $file; ?>" />
