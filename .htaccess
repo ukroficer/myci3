@@ -1,6 +1,24 @@
-<IfModule authz_core_module>
-    Require all denied
-</IfModule>
-<IfModule !authz_core_module>
-    Deny from all
-</IfModule>
+AddDefaultCharset utf-8
+    # Убедитесь в том, каталогов отключена
+	RewriteBase /
+	RewriteEngine on
+    
+    
+	# To rewrite "domain.com -> www.domain.com" uncomment the following lines.
+	RewriteCond %{HTTPS} !=on
+	RewriteCond %{HTTP_HOST} !^www\..+$ [NC]
+	RewriteCond %{HTTP_HOST} (.+)$ [NC]
+	RewriteRule ^(.*)$ http://www.%1/$1 [R=301,L]
+	# Remove index.php from URL
+	RewriteCond %{HTTP:X-Requested-With}	!^XMLHttpRequest$
+	RewriteCond %{THE_REQUEST}				^[^/]*/index\.php [NC]
+	RewriteRule ^index.php(.*)$			$1 [R=301,NS,L]
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-d    
+    RewriteRule ^(.*)$ index.php?/$1 [L]
+
+
+
+
+
+
