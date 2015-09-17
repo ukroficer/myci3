@@ -3,14 +3,20 @@ if (!defined('BASEPATH'))
   exit('No direct script access allowed');
 class Lang extends Admin_Controller
 {
-  protected $rules_key = array( 
-   'key'=>array(
+  protected $rules_lang = array( 
+   'key'=>
+    array(
             'field' => 'key',
             'label' => 'lang:key',
-            'rules' => 'trim|required'),
-   
+            'rules' => 'trim|is_unique[users.username.id.%s]|htmlspecialchars|required|min_length[1]|max_length[255]|encode_php_tags'),
+  'group_id'=>
+   array(
+            'field' => 'group_id',
+            'label' => 'lang:group',
+            'rules' => 'trim|required|integer|callback__check_lang'),
+       
   ); 
-        
+  public $primary_key  = null;    
       
    
   public function __construct()
@@ -31,16 +37,20 @@ class Lang extends Admin_Controller
     $this->filter_fields['text'] = array('encode_php_tags');
     $this->filed_url_generation = 'name';
     $this->get_lang_field();
+   
     $state = $this->crud->getState();
-   // $state_info = $this->crud->getStateInfo();
+    $state_info = $this->crud->getStateInfo();
     
    
-   // $primary_key = isset($state_info->primary_key)?$state_info->primary_key:null;
+    $this->primary_key = isset($state_info->primary_key)?$state_info->primary_key:null;
          
     
     
-   // $this->rules_key['key']['rules'] = sprintf($this->rules_key['key']['rules'],$primary_key);
+    //$this->rules_key['key']['rules'] = sprintf($this->rules_key['key']['rules'],$primary_key);
   
+    
+
+    
     
     $this->crud
          ->columns('id','values','key','group_id')
@@ -49,7 +59,7 @@ class Lang extends Admin_Controller
          ->callback_after_insert(array($this, '_callback_insert'))
          ->callback_after_update(array($this, '_callback_insert'))
          ->callback_column("values",array($this,'_values_callback'))
-         ->set_rules($this->rules_key)
+         ->set_rules($this->rules_lang)
          ->required_fields($this->mod_lang->get_fields())
          ->display_as('group_id', lang('group'))
          ->display_as('key', lang('key'));
@@ -60,6 +70,25 @@ class Lang extends Admin_Controller
  function _callback_insert($data,$id)
  {
     $this->mod_lang->save($data,$id);  
+ }
+ function _check_lang($str)
+ {
+
+    $name  = $this->input->post('name');
+    $key   = $this->input->post('key');
+    $group = $this->input->post('group_id');
+    
+    $data =  $this->mod_lang->get_value_is($name,$key,$group,$this->primary_key);
+    
+    
+    foreach ($data as $k=>$v) {
+     if($v['group'])
+     {
+      $this->form_validation->set_message('_check_lang', sprintf(lang('key exists'),$key,$v['group']));
+      return false;
+     }
+    }
+   return true; 
  }
  protected function get_lang_field()
  {
@@ -76,6 +105,7 @@ class Lang extends Admin_Controller
     
     
     $data = $this->mod_lang->get_value($key_id,$value->name);
+   
     
     return form_input($value->name,$data);
     

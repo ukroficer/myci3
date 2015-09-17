@@ -7,11 +7,14 @@ class MY_Controller extends CI_Controller
     public $menu;
     public function __construct()
     {
-        parent::__construct(); 
+        parent::__construct();
         if ($this->input->is_ajax_request()) 
             $this->output->enable_profiler(false);
         else 
             $this->output->enable_profiler(true);
+        $this->lang->load('this_site');    
+            
+            
         $this->user =  $this->ion_auth->user()->row();
         $this->group_id = $this->session ->userdata('group_id');
         $this->menu = array();
@@ -63,7 +66,6 @@ class Admin_Controller extends MY_Controller
             'admin'=>lang('admin panel'),
             'admin/users'=>lang('users'),
             'admin/lang'=>lang('lang'),
-            'admin/news'=>lang('news'),
             'admin/settings'=>lang('settings'),
             'admin/pages'=>lang('pages'),
         );

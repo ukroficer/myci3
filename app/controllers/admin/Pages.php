@@ -6,10 +6,22 @@ class Pages extends Admin_Controller
   public function __construct()
   {
     parent::__construct(); 
+     //@session_start();
+        
+     //$_SESSION['KCFINDER']['uploadURL'] = '/upls/files/1';
+     $_SESSION['KCFINDER'] = array(
+    'disabled' => false,
+    'uploadURL' => "/upls",
+    'uploadDir' => ""
+);
+     
   }
 
   function index()
   {
+
+    $all = $this->session->all_userdata();
+    var_dump($all);
     $this->breadcrumbs['admin/pages'] = lang('pages');
     $this->current_section = lang('pages');
     $this->table_bd = 'pages';

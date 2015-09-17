@@ -4,7 +4,30 @@ class Mod_lang extends MY_Model
     public function __construct()
     {
         parent::__construct();
-    }   
+    } 
+    function get_value_is($name,$key,$group,$id)
+    {
+          foreach ($name as $k=>$v) {
+             $result = $this->db 
+                            ->select('lg.name group')
+                            ->from('lang_value lv')
+                            ->join('lang_key lk','lk.id = lv.key_id')
+                            ->join('lang_groups lg','lg.id = lk.group_id')
+                            ->where('lk.key',$key)
+                            ->where('lk.group_id',$group)
+                            ->where('lv.lang_id',$k)
+                            ->where('lk.id !=',$id)
+                            ->get()
+                            ->row();
+             $data[$k]['group'] = $result == null?false:$result->group;
+             $data[$k]['value'] = $v;                
+              
+        } 
+     
+          return  $data; 
+        
+        
+    }  
     function save_parser($vl,$key_id,$lang_id)
     {
         $data = $this->db

@@ -1,0 +1,6 @@
+[17-Sep-2015 16:13:31 UTC] PHP Fatal error:  Call to undefined function lang() in /home/france/public_html/tpl/profiler_template.php on line 468
+[17-Sep-2015 16:13:31 UTC] PHP Stack trace:
+[17-Sep-2015 16:13:31 UTC] PHP   1. {main}() /home/france/public_html/tpl/profiler_template.php:0
+[17-Sep-2015 16:15:39 UTC] PHP Fatal error:  Call to undefined function lang() in /home/france/public_html/tpl/profiler_template.php on line 468
+[17-Sep-2015 16:15:39 UTC] PHP Stack trace:
+[17-Sep-2015 16:15:39 UTC] PHP   1. {main}() /home/france/public_html/tpl/profiler_template.php:0

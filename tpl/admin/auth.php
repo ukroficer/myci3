@@ -7,17 +7,17 @@
                 <fieldset class="boxBody">   
                 <?=$message;?>
                 
-                    <label>Логин</label>
-                    <input type="text" name="username" tabindex="1" placeholder="Логин" id="login">
+                    <label><?=lang('login');?></label>
+                    <input type="text" name="username" tabindex="1" placeholder="<?=lang('login');?>" id="login">
                     <?=form_error('username');?>
-                    <label>Пароль</label>
+                    <label><?=lang('password');?></label>
                     <input type="password" name="password" tabindex="2" id="password">
                     <?=form_error('password');?>
                 </fieldset>
                 <span>
                 <a href="<?=site_url('admin/forgot_password');?>"><?=lang('forgot_password');?></a></span>
                 <footer>
-                    <button type="submit" class="btnLogin"  id="submit" >Enter</button>
+                    <button type="submit" class="btnLogin"  id="submit" ><?=lang('enter');?></button>
                 </footer>
                 <?form_close();?>
                 

@@ -28,7 +28,7 @@
     <!-- footer -->
     <footer id="footer">
         <div id="copiright_web">
-            <p>Разработано <a href="http://www.webcapitan.com/">Webcapitan.com</a> 2012-2014</p>
+            <p><?=lang('developed');?> <a href="http://www.webcapitan.com/">Webcapitan.com</a> 2012-<?=date('Y');?></p>
         </div>
     </footer>
     <!-- end-of-footer -->
